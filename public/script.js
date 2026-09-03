@@ -15,7 +15,7 @@ let state = []
 let cooldown;
 let cooldown2;
 let socket =  null
-
+// http://localhost:8080
 let requestsArray = []
 let friendsArray = []
 function requests() {
@@ -101,7 +101,7 @@ function friends(states) {
         friendBtn.addEventListener('click', async (e) => {
             if (e.target.closest('.edit') || e.target.closest('.edit-menu')) return;
             chosenFriend = friend.username; 
-            let res = await fetch(`http://localhost:8080/api/users/${chosenFriend}`, {
+            let res = await fetch(`https://chatme-production-1e37.up.railway.app/api/users/${chosenFriend}`, {
                 method: 'GET',
                 credentials: 'include'
             })
@@ -135,7 +135,7 @@ function friends(states) {
         })
         document.querySelector('.friends').append(friendBtn);
         friendBtn.append(profilePic, friendName, status, edit, editMenu);
-        let res = await fetch('http://localhost:8080/api/friends', {
+        let res = await fetch('https://chatme-production-1e37.up.railway.app/api/friends', {
         method: 'GET',
         credentials: 'include'
     });
@@ -206,7 +206,7 @@ signupBtn.addEventListener('click', async () => {
     if (passwordInputSignup.value.length > 15) { errorMsg('Password is too long!'); return; }
     if (passwordInputSignup.value.length < 5) { errorMsg('Password is not long enough!'); return; }
     if (passwordInputSignup.value !== confirmPassword.value) { errorMsg('Passwords do not match!'); return; }
-    let res = await fetch('http://localhost:8080/api/users/signup', {
+    let res = await fetch('https://chatme-production-1e37.up.railway.app/api/users/signup', {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -247,7 +247,7 @@ function errorMsg2 (text) {
 
 loginBtn.addEventListener('click', async () => {
     if (userInputLogin.value.trim() === '' ||  passwordInputLogin.value.trim() === '') { errorMsg2('Include username and password!'); return; };
-    let res = await fetch('http://localhost:8080/api/users/login', {
+    let res = await fetch('https://chatme-production-1e37.up.railway.app/api/users/login', {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -291,7 +291,7 @@ document.querySelector('.remove-data').addEventListener('click', async () => {
     socket.send(JSON.stringify({
         type: 'logout'
     }));
-    let res = await fetch('http://localhost:8080/api/users/fullDelete', {
+    let res = await fetch('https://chatme-production-1e37.up.railway.app/api/users/fullDelete', {
         method: 'DELETE',
         credentials: 'include'
     });
@@ -328,14 +328,14 @@ logout.addEventListener("click", async () => {
         type: 'logout'
     }))
     disconnectSocket()
-    let res = await fetch('http://localhost:8080/api/users/remove', {
+    let res = await fetch('https://chatme-production-1e37.up.railway.app/api/users/remove', {
         method: 'GET',
         credentials: 'include'
     });
 })
 
 async function userExists() {
-    let res = await fetch('http://localhost:8080/api/users/me', {
+    let res = await fetch('https://chatme-production-1e37.up.railway.app/api/users/me', {
         method: 'GET',
         credentials: 'include'
     });
@@ -397,12 +397,12 @@ function requestMsg(msg, color) {
     }, 5000)
 }
 document.querySelector('.send-request').addEventListener('click', async () => {
-    let res = await fetch('http://localhost:8080/api/users/me', {
+    let res = await fetch('https://chatme-production-1e37.up.railway.app/api/users/me', {
         method: 'GET',
         credentials: 'include'
     });
     let data = await res.json()
-    let res2 = await fetch('http://localhost:8080/api/users', {
+    let res2 = await fetch('https://chatme-production-1e37.up.railway.app/api/users', {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -460,7 +460,7 @@ function socketConnection() {
     if (socket && socket.readyState == WebSocket.OPEN) {
         return socket;
     }
-    socket = new WebSocket('ws://localhost:8080');
+    socket = new WebSocket('ws://chatme-production-1e37.up.railway.app');
 socket.onopen = () => {
     console.log('connected!')
     socket.send(JSON.stringify({
