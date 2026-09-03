@@ -460,7 +460,7 @@ function socketConnection() {
     if (socket && socket.readyState == WebSocket.OPEN) {
         return socket;
     }
-    socket = new WebSocket('ws://chatme-production-1e37.up.railway.app');
+    socket = new WebSocket('wss://chatme-production-1e37.up.railway.app');
 socket.onopen = () => {
     console.log('connected!')
     socket.send(JSON.stringify({
