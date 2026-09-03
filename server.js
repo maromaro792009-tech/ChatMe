@@ -23,6 +23,8 @@ app.use((req, res, next) => {
     next()
 });
 
+app.set('trust proxy', 1);
+
 const sessionParser = session({
     secret: 'secret-key',
     resave: false,
