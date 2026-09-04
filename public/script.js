@@ -543,7 +543,7 @@ document.addEventListener('click', (e) => {
             })
 })
 document.querySelector('.user-home').append(document.querySelector('.chat-area'))
-window.addEventListener('resize', () => {
+/*window.addEventListener('resize', () => {
     if (window.innerWidth > 800) {
         document.querySelector('.user-home').append(document.querySelector('.chat-area'))
         document.querySelector('.live-chat').scrollBy({
@@ -555,7 +555,22 @@ window.addEventListener('resize', () => {
             top: document.querySelector('.live-chat').scrollHeight
         })
     }
-})
+})*/
+
+window.addEventListener('resize', () => {
+    const desiredParent = window.innerWidth > 800
+        ? document.querySelector('.user-home')
+        : document.querySelector('.home');
+    const chatArea = document.querySelector('.chat-area');
+
+    if (chatArea.parentElement !== desiredParent) {
+        desiredParent.append(chatArea);
+        document.querySelector('.live-chat').scrollBy({
+            top: document.querySelector('.live-chat').scrollHeight
+        });
+    }
+});
+
 document.querySelector('.go-back').addEventListener('click', () => {
     document.querySelector('.chat-area').classList.remove('msg');
 })
@@ -585,6 +600,3 @@ notifcations.observe(requestsArea, {
     characterData: true
 })
 
-chatInput.addEventListener('touchstart', () => {
-   chatInput.focus()
-}, { passive: false })
