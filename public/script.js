@@ -584,3 +584,8 @@ notifcations.observe(requestsArea, {
     childList: true,
     characterData: true
 })
+
+chatInput.addEventListener('touchstart', (e) => {
+   e.preventDefault()
+   chatInput.focus()
+}, { passive: false })
