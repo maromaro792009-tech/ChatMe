@@ -79,7 +79,7 @@ export const serverConnection = (socket, req) => {
             let neededUser = clients.get(requestedUser.id)
             let user = clients.get(req.session.userId);
             const userDeleteRequest = await Users.updateOne({ id: req.session.userId }, { $pull: { requests: { $or: [{ to: requestedUser.username }, { from: requestedUser.username }] } } })
-            const requestedUserDeleteRequest = await Users.updateOne({ username: requestedUser.username }, { $pull: { requests: { $or: [{ to: requestedUser.username }, { from: requestedUser.username }] } } })
+            const requestedUserDeleteRequest = await Users.updateOne({ username: requestedUser.username }, { $pull: { requests: { $and: [{ to: requestedUser.username }, { from: mainUser.username }] } } })
             if (message.state == 'declined') {
                 const data = {
                     type: 'response-to-request',
