@@ -197,6 +197,11 @@ function errorMsg(text) {
         }, 5000)
 }
 
+function noWhitespace(text) {
+    text = text.replaceAll(" ", "");
+    return text;
+}
+
 signupBtn.addEventListener('click', async () => {
     try {
     if (userInputSignup.value.trim() === '' ||  passwordInputSignup.value.trim() === '' || confirmPassword.value.trim() === '') { errorMsg('Include username and password!'); return; }
@@ -213,8 +218,8 @@ signupBtn.addEventListener('click', async () => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            username: userInputSignup.value,
-            password: passwordInputSignup.value
+            username: noWhitespace(userInputSignup.value),
+            password: noWhitespace(passwordInputSignup.value)
         })
     })
     if (!res.ok) {
