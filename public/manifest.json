@@ -1,7 +1,7 @@
 {
   "name": "ChatMe",
   "short_name": "ChatMe",
-  "start_url": "./public",
+  "start_url": "./ChatMe/public",
   "display": "standalone",
   "background_color": "#161616",
   "theme_color": "#161616",
