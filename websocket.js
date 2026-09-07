@@ -1,7 +1,7 @@
 import Users from './database/users.js';
 import Messages from './database/messages.js';
 
-function dateCreated() {
+function UTCdate() {
     let date = new Date();
     let t = {
         year: date.getFullYear(),
@@ -143,7 +143,7 @@ export const serverConnection = (socket, req) => {
                 from: mainUser.username,
                 id: mainUser.id,
                 to: requestedUser.username,
-                date: dateCreated(),
+                date: `${new Date().toLocaleString('en-IN', { timeZone: 'Africa/Cairo' })}`,
                 color: mainUser.color,
                 text: message.text 
             }
