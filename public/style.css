@@ -343,6 +343,7 @@ body {
     margin: 0 auto 0 20px;
     color: rgb(160, 160 ,160);
     font-weight: 500;
+    font-size: 0.7em;
 } .text {
     inset: 0;
     width: 85%;
